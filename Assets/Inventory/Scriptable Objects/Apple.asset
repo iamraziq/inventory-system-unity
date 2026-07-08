@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d3f3f6a23a428784f89616d0e50a2b3a, type: 3}
   m_Name: Apple
   m_EditorClassIdentifier: Assembly-CSharp::FoodItem
-  displayName: 
+  displayName: Apple
   maxStackSize: 64
-  icon: {fileID: 0}
-  hungerRestored: 4
+  icon: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
+  hungerRestored: 5

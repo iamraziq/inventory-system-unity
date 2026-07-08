@@ -18,7 +18,7 @@ public class ItemStack
     {
         int space = Item.MaxStackSize - Count;
         int added = Math.Min(space, amount);
-        Count += amount;
+        Count += added; // need to add what fits
         return amount - added;
     }
 

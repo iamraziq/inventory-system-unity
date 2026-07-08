@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b177faa2692898544b6f9573719067b2, type: 3}
   m_Name: Dirt
   m_EditorClassIdentifier: Assembly-CSharp::BlockItem
-  displayName: 
+  displayName: Dirt
   maxStackSize: 64
-  icon: {fileID: 0}
+  icon: {fileID: 10911, guid: 0000000000000000f000000000000000, type: 0}
