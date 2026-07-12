@@ -76,4 +76,18 @@ public class Inventory
         (slots[from], slots[to]) = (slots[to], slots[from]); // swap - reversible for undo later
         NotifyChanged();
     }
+
+    public bool ConsumeAt(int index)
+    {
+        ItemStack s = slots[index];
+        if(s == null) return false;
+
+        Item item = s.Item;
+        if(s.Count == 1) slots[index] = null; // last one -> empty(null, not zero)
+        else s.Reduce(1); // Reduce guards its own invariant
+
+        RecordRemove(item, 1); // single write path keeps the index in sync
+        NotifyChanged(); // announce -> view repaints
+        return true;
+    }
 }

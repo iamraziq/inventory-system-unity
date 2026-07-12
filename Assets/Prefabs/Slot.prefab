@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 3487706329001574857}
   - component: {fileID: 9104050108082647854}
   - component: {fileID: 246620779632410343}
+  - component: {fileID: -2495479241165747744}
   m_Layer: 5
   m_Name: Slot
   m_TagString: Untagged
@@ -77,6 +78,20 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &-2495479241165747744
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1401486671296820598}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 18ff4ce944df28c4da0e4e58dc4d7f84, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SlotView
+  icon: {fileID: 2590675337546806518}
+  countText: {fileID: 1530022301595412664}
 --- !u!1 &7130450088346545120
 GameObject:
   m_ObjectHideFlags: 0
@@ -135,7 +150,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
