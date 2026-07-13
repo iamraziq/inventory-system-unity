@@ -6,10 +6,23 @@ public class InventoryView : MonoBehaviour
     [SerializeField] private SlotView slotPrefab;
     [SerializeField] private Transform slotParent; // the InventoryPanel object
 
+    [SerializeField] private Item testItem,testItem2; // drag Dirt here
+
+    [SerializeField] private TooltipView tooltip;
+
     private Inventory inventory;
     private readonly List<SlotView> slotViews = new();
     private readonly CommandProcessor commands = new();
 
+    public void AddTestItems()
+    {
+        inventory.AddItem(new ItemStack(testItem, 30)); // fires the event -> repaints itself
+    }
+
+    public void AddTest2Items()
+    {
+        inventory.AddItem(new ItemStack(testItem2, 10)); // fires the event -> repaints itself
+    }
     public void Bind(Inventory inventory)
     {
         this.inventory = inventory;
@@ -20,12 +33,28 @@ public class InventoryView : MonoBehaviour
             view.SetIndex(i);
             view.Clicked += OnSlotClicked; // listen to each slot
             view.Moved += OnSlotMoved;
+            view.HoverEnter += OnSlotHoverEnter;
+            view.HoverExit += OnSlotHoverExit;
+            view.RightClicked += i => inventory.SplitStack(i);
             slotViews.Add(view);
         }
 
         inventory.InventoryChanged += Redraw; // Observer: subscribe
         Redraw();                             // draw the initial state once
     }
+
+    private void OnSlotHoverEnter(int index)
+    {
+        ItemStack s = inventory.GetSlot(index);
+        if(s == null)
+        {
+            tooltip.Hide();
+            return;
+        }
+        tooltip.Show($"{s.Item.Name}\nStack: {s.Count}/{s.Item.MaxStackSize}");
+    }
+
+    private void OnSlotHoverExit() => tooltip.Hide();
 
     private void OnSlotClicked(int index)
     {

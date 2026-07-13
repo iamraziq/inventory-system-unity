@@ -90,4 +90,28 @@ public class Inventory
         NotifyChanged(); // announce -> view repaints
         return true;
     }
+
+    public bool SplitStack(int index)
+    {
+        ItemStack source = slots[index];
+        if(source == null || source.Count < 2) return false; // nothing to split
+
+        int moved = source.Count / 2; // take half (rounds down)
+
+        int empty = FindEmptySlot();
+        if(empty < 0) return false; // ATOMIC: no room -> abort, touch nothing
+
+        source.Reduce(moved); // source keeps the larger half
+        slots[empty] = new ItemStack(source.Item, moved); // new stack = the carved half
+        RecordAdd(source.Item, 0);
+        NotifyChanged();
+        return true;
+    }
+
+    private int FindEmptySlot()
+    {
+        for(int i = 0; i < slots.Length; i++)
+            if(slots[i] == null) return i;
+        return -1; // linear search, O(n) 
+    }
 }

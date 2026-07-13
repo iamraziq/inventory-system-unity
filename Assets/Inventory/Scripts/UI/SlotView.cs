@@ -4,20 +4,31 @@ using UnityEngine.EventSystems;
 using TMPro;
 using UnityEngine.Rendering;
 
-public class SlotView : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, IDragHandler, IEndDragHandler, IDropHandler
+public class SlotView : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, IDragHandler, IEndDragHandler, IDropHandler, IPointerEnterHandler, IPointerExitHandler
 {
     [SerializeField] private Image icon;
     [SerializeField] private TMP_Text countText;
 
     public event System.Action<int> Clicked; // "someone clicked me - here's my index"
     public event System.Action<int, int> Moved; // (fromIndex, toIndex)
+    public event System.Action<int> HoverEnter;
+    public event System.Action HoverExit;
+    public event System.Action<int> RightClicked;
     private int index;
     private static int draggedFrom = -1; // shared accross all slots during one drag
 
     public void SetIndex(int i) => index = i;
 
-    public void OnPointerClick(PointerEventData eventData) => Clicked?.Invoke(index);
+    public void OnPointerEnter(PointerEventData e) => HoverEnter?.Invoke(index);
+    public void OnPointerExit(PointerEventData e) => HoverExit?.Invoke();
 
+    public void OnPointerClick(PointerEventData e)
+    {
+        if(e.button == PointerEventData.InputButton.Right)
+            RightClicked?.Invoke(index);
+        else
+            Clicked?.Invoke(index);
+    }
     public void OnBeginDrag(PointerEventData e) 
     {
         draggedFrom = index;
